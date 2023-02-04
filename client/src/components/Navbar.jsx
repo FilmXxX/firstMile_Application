@@ -52,7 +52,7 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
           </IconButton>
           <Box sx={{m:"5px 10px 0px 10px",}}>
                   {theme.palette.mode === 'dark' ? (
-                          <Link to={"/"}><img src="../assets/logo-wite.png" alt="firstmile Logo" width={"110px"} height="50" /></Link> 
+                          <Link to={"/invoices"}><img src="../assets/logo-wite.png" alt="firstmile Logo" width={"110px"} height="50" /></Link> 
                       ) : (<Link to={"/"}><img src="../assets/logo-normal.png" alt="firstmile Logo" width={"110px"} height="50" /></Link>)}
           </Box>
         </FlexBetween>

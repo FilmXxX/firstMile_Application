@@ -9,6 +9,7 @@ import Dashboard from "scenes/dashboard";
 import Contracts from "scenes/contracts";
 import Team from "scenes/team";
 import Invoices from "scenes/invoices";
+import Building from "scenes/building";
 // import Form from "scenes/form";
 // import Overview from "scenes/overview";
 // import Daily from "scenes/daily";
@@ -32,6 +33,7 @@ function App() {
               <Route path="/contracts" element={<Contracts />} />
               <Route path="/team" element={<Team />} />
               <Route path="/invoices" element={<Invoices />} />
+              <Route path="/building" element={<Building />} />
               {/* <Route path="/form" element={<Form />} /> */}
               {/* <Route path="/overview" element={<Overview />} />
               <Route path="/daily" element={<Daily />} />
