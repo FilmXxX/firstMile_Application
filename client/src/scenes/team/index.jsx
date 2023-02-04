@@ -27,8 +27,8 @@ const Team = () => {
                     justifyContent="center"
                     backgroundColor={
                         access === "admin"
-                        ? colors.blueAccent[600]
-                        : colors.blueAccent[700]
+                        ? colors.grey[600]
+                        : colors.grey[700]
                     }
                     borderRadius="4px"
                 >
