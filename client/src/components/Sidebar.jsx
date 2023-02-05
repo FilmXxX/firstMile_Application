@@ -11,6 +11,7 @@ import {
   ListItemText,
   Typography,
   useTheme,
+  Collapse,
 } from "@mui/material";
 
 //IMPORT ICON
@@ -30,13 +31,105 @@ import {
   TrendingUpOutlined,
   PieChartOutlined,
 } from "@mui/icons-material";
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ImportContactsOutlinedIcon from '@mui/icons-material/ImportContactsOutlined';
-
-
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import FlexBetween from "./FlexBetween";
+import { width } from "@mui/system";
 // import profileImage from "assets/user.png";
+
+const ParentItem = ({title, icon, ChildItem}) => {
+  const [active, setActive] = useState("");
+  const theme = useTheme();
+  const [open, setOpen] = React.useState(false);
+
+
+  const handleClick = () => {
+    setOpen(!open)};
+  
+  return (
+    <List disablePadding>
+      <ListItemButton 
+      onClick={() => {
+        handleClick();
+        setActive(title);
+      }}
+      sx={{
+        backgroundColor: theme.palette.background.light,
+        color:theme.palette.primary.dark
+      }}
+      
+      >
+        <ListItemIcon
+        sx={{
+          ml: "1rem",
+          color: theme.palette.primary.dark,
+        }}
+        >
+          {icon}
+        </ListItemIcon>
+        <ListItemText primary={title} sx={{ml: "-1rem",}} />
+        {open ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+      </ListItemButton>
+      <Collapse in={open} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding sx={{ pl: 2 }}>
+          {ChildItem}
+        </List>
+      </Collapse>
+    </List>
+  );
+}
+
+const ChildItem = ({title, icon, path}) => {
+  const [active, setActive] = useState("");
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+  const theme = useTheme();
+  
+  useEffect(() => {
+    setActive(pathname.substring(1));
+  }, [pathname]);
+  
+  return (
+    <List disablePadding>
+      <ListItemButton
+        onClick={() => {
+          navigate(`/${path}`);
+          setActive(path);
+        }}
+        sx={{
+          backgroundColor:
+            active === path
+              ? theme.palette.background.default
+              : "transparent",
+          color:
+            active === path
+              ? theme.palette.primary.light
+              : theme.palette.primary.dark,
+          
+            }}
+      >
+        <ListItemIcon
+          sx={{
+            ml: "1rem",
+            color:
+              active === path
+              ? theme.palette.primary.light
+              : theme.palette.primary.dark,
+          }}
+        >
+          {icon}
+        </ListItemIcon>
+        <ListItemText primary={title} sx={{ml: "-1rem",}} />
+        {active === path && (
+          <ChevronRightOutlined sx={{ ml: "auto" }} />
+        )}
+      </ListItemButton>
+    </List>
+  )
+}
 
 
 
@@ -62,16 +155,16 @@ const navItems = [
     icon: <ReceiptLongOutlined />,
   },
   {
-    text: "Form",
-    icon: <PublicOutlined />,
-  },
-  {
     text: "Building",
     icon: <PublicOutlined />,
   },
   {
     text: "Sales",
     icon: null,
+  },
+  {
+    text: "Form",
+    icon: <PublicOutlined />,
   },
   {
     text: "Overview",
@@ -110,14 +203,7 @@ const Sidebar = ({
   setIsSidebarOpen,
   isNonMobile,
 }) => {
-  const { pathname } = useLocation();
-  const [active, setActive] = useState("");
-  const navigate = useNavigate();
   const theme = useTheme();
-
-  useEffect(() => {
-    setActive(pathname.substring(1));
-  }, [pathname]);
 
   return (
     // BIG BOX
@@ -133,7 +219,7 @@ const Sidebar = ({
             width: drawerWidth,
             "& .MuiDrawer-paper": {
               color: theme.palette.primary.light,
-              backgroundColor: theme.palette.background.main,
+              backgroundColor: theme.palette.background.dark,
               boxSixing: "border-box",
               borderWidth: isNonMobile ? 0 : "2px",
               width: drawerWidth,
@@ -141,9 +227,9 @@ const Sidebar = ({
           }}
         >
           <Box width="100%">
-            <Box m="1.5rem 1rem 1rem 2rem">
               {/* Header */}
-              <FlexBetween color={theme.palette.primary.light}>
+            <Box m="1.5rem 1rem 1rem 2rem">
+              <FlexBetween color={theme.palette.primary.dark}>
                 <Box display="flex" alignItems="center" gap="0.5rem">
                   <Typography variant="h4" fontWeight="bold">
                     MENU
@@ -158,55 +244,17 @@ const Sidebar = ({
               </FlexBetween>
             </Box>
             <List>
-              {navItems.map(({ text, icon }) => {
-                // Header (without icon)
-                if (!icon) {
-                  return (
-                    <Typography key={text} sx={{ m: "2.25rem 0 1rem 3rem" }}>
-                      {text}
-                    </Typography>
-                  );
-                }
-                const lcText = text.toLowerCase();
+              <ChildItem title="Dashboard" icon={<HomeOutlined />} path="dashboard" />
+              <ParentItem title="Contracts" icon={<ImportContactsOutlinedIcon />} ChildItem={[
+                <ChildItem title="Contracts Home" icon={<ImportContactsOutlinedIcon />} path="contracts" />,
+              ]} />
+              <ParentItem title="Invoices" icon={<ReceiptLongOutlined />} ChildItem={[
+                <ChildItem title="Invoices Home" icon={<ReceiptLongOutlined />} path="invoices" />,
+              ]} />
+              <ParentItem title="Team" icon={<Groups2Outlined />} ChildItem={[
+                <ChildItem title="Team Home" icon={<Groups2Outlined />} path="team" />,
+              ]} />
 
-                return (
-                  <ListItem key={text} disablePadding>
-                    <ListItemButton
-                      onClick={() => {
-                        navigate(`/${lcText}`);
-                        setActive(lcText);
-                      }}
-                      sx={{
-                        backgroundColor:
-                          active === lcText
-                            ? theme.palette.background.default
-                            : "transparent",
-                        color:
-                          active === lcText
-                            ? theme.palette.primary.light
-                            : theme.palette.primary.main,
-                        
-                      }}
-                    >
-                      <ListItemIcon
-                        sx={{
-                          ml: "2rem",
-                          color:
-                            active === lcText
-                            ? theme.palette.primary.light
-                            : theme.palette.primary.main,
-                        }}
-                      >
-                        {icon}
-                      </ListItemIcon>
-                      <ListItemText primary={text} />
-                      {active === lcText && (
-                        <ChevronRightOutlined sx={{ ml: "auto" }} />
-                      )}
-                    </ListItemButton>
-                  </ListItem>
-                );
-              })}
             </List>
           </Box>
 

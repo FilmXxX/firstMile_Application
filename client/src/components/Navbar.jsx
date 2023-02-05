@@ -40,6 +40,7 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
         position: "static",
         backgroundColor: theme.palette.background.dark,
         boxShadow: "none",
+        
       }}
     >
       <Toolbar sx={{ justifyContent: "space-between" }}>
@@ -52,7 +53,7 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
           </IconButton>
           <Box sx={{m:"5px 10px 0px 10px",}}>
                   {theme.palette.mode === 'dark' ? (
-                          <Link to={"/invoices"}><img src="../assets/logo-wite.png" alt="firstmile Logo" width={"110px"} height="50" /></Link> 
+                          <Link to={"/"}><img src="../assets/logo-wite.png" alt="firstmile Logo" width={"110px"} height="50" /></Link> 
                       ) : (<Link to={"/"}><img src="../assets/logo-normal.png" alt="firstmile Logo" width={"110px"} height="50" /></Link>)}
           </Box>
         </FlexBetween>
@@ -71,15 +72,15 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
 
         {/* RIGHT SIDE */}
         <FlexBetween gap="1.5rem">
-          <IconButton onClick={() => dispatch(setMode())}>
+          <IconButton onClick={() => dispatch(setMode())} >
             {theme.palette.mode === "dark" ? (
-              <DarkModeOutlined sx={{ fontSize: "25px" }} />
+              <DarkModeOutlined sx={{ fontSize: "25px", color: theme.palette.primary.main }} />
             ) : (
-              <LightModeOutlined sx={{ fontSize: "25px" }} />
+              <LightModeOutlined sx={{ fontSize: "25px", color: theme.palette.primary.main }} />
             )}
           </IconButton>
           <IconButton>
-            <SettingsOutlined sx={{ fontSize: "25px" }} />
+            <SettingsOutlined sx={{ fontSize: "25px", color: theme.palette.primary.main }} />
           </IconButton>
 
           {/* <FlexBetween>

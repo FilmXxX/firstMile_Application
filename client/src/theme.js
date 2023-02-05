@@ -2,7 +2,7 @@
 export const tokensDark = {
   grey: {
     0: "#ffffff", // manually adjusted
-    10: "#f6f6f6", // manually adjusted
+    10: "#f9f9f9", // manually adjusted
     50: "#f0f0f0", // manually adjusted
     100: "#e0e0e0",
     200: "#c2c2c2",
@@ -16,7 +16,7 @@ export const tokensDark = {
     1000: "#000000", // manually adjusted
   },
   primary: {
-    // blue
+    // black
         100: "#d9d9d9",
         200: "#b3b3b3",
         300: "#8c8c8c",
@@ -28,16 +28,16 @@ export const tokensDark = {
         900: "#0d0d0d"
   },
   secondary: {
-    // black
-        100: "#d3d3d8",
-        200: "#a6a7b1",
-        300: "#7a7b89",
-        400: "#4d4f62",
-        500: "#21233b",
-        600: "#1a1c2f",
-        700: "#141523",
-        800: "#0d0e18",
-        900: "#07070c"
+    //teal: 
+        100: "#d7edf9",
+        200: "#aedcf3",
+        300: "#86caec",
+        400: "#5db9e6",
+        500: "#35a7e0",
+        600: "#2a86b3",
+        700: "#206486",
+        800: "#15435a",
+        900: "#0b212d"
   },
 };
 
@@ -68,43 +68,55 @@ export const themeSettings = (mode) => {
             // palette values for dark mode
             primary: {
               ...tokensDark.primary,
-              main: tokensDark.primary[400],
-              light: tokensDark.primary[400],
+              dark: tokensDark.grey[200],
+              main: tokensDark.grey[50],
+              light: tokensDark.grey[0],
             },
             secondary: {
               ...tokensDark.secondary,
-              main: tokensDark.secondary[300],
+              dark: tokensDark.secondary[700],
+              main: tokensDark.secondary[500],
+              light: tokensDark.secondary[400],
             },
             neutral: {
               ...tokensDark.grey,
-              main: tokensDark.grey[500],
+              dark: tokensDark.primary[300],
+              main: tokensDark.primary[200],
+              light: tokensDark.primary[100],
             },
             background: {
-              default: tokensDark.grey[600],
-              alt: tokensDark.grey[500],
+              dark: tokensDark.grey[1000],
+              default: tokensDark.grey[800],
+              alt: tokensDark.grey[800],
             },
           }
         : {
             // palette values for light mode
             primary: {
-              ...tokensLight.primary,
-              main: tokensDark.grey[50],
-              light: tokensDark.grey[100],
+              ...tokensDark.primary,
+              dark: tokensDark.grey[500],
+              main: tokensDark.grey[800],
+              light: tokensDark.grey[900],
             },
             secondary: {
-              ...tokensLight.secondary,
-              main: tokensDark.secondary[600],
-              light: tokensDark.secondary[700],
+              ...tokensDark.secondary,
+              dark: tokensDark.secondary[400],
+              main: tokensDark.secondary[200],
+              light: tokensDark.secondary[100],
             },
             neutral: {
-              ...tokensLight.grey,
-              main: tokensDark.grey[500],
+              ...tokensDark.grey,
+              dark: tokensDark.primary[500],
+              main: tokensDark.primary[600],
+              light: tokensDark.primary[700],
             },
             background: {
-              default: tokensDark.grey[0],
-              alt: tokensDark.grey[50],
+              dark: tokensDark.grey[0],
+              default: tokensDark.grey[50],
+              alt: tokensDark.grey[10],
             },
-          }),
+            }
+          ),
     },
     typography: {
       fontFamily: ["Inter", "sans-serif"].join(","),

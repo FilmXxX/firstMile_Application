@@ -5,11 +5,9 @@ import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettin
 import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import Header from "../../components/Header";
-import { tokensDark } from "state/theme";
 
 const Team = () => {
     const theme = useTheme();
-    const colors = tokensDark(theme.palette.mode)
 
     const columns = [ 
         {field: "id", headerName: "ID", flex: 0.3,  },
@@ -27,15 +25,15 @@ const Team = () => {
                     justifyContent="center"
                     backgroundColor={
                         access === "admin"
-                        ? colors.grey[600]
-                        : colors.grey[700]
+                        ? theme.palette.secondary.dark
+                        : theme.palette.secondary.main
                     }
                     borderRadius="4px"
-                >
+                    >
                     {access === "admin" && <AdminPanelSettingsOutlinedIcon />}
                     {access === "manager" && <SecurityOutlinedIcon />}
                     {access === "user" && <LockOpenOutlinedIcon />}
-                    <Typography color={colors.grey[100]} sx={{ml: "5px"}}>
+                    <Typography color={theme.palette.primary.main} sx={{ml: "5px"}}>
                         {access}
                     </Typography>
                 </Box>
@@ -55,19 +53,19 @@ const Team = () => {
                     borderBottom: "none"
                 },
                 "& .name-column--cell": {
-                    color: colors.grey[100]
+                    color: theme.palette.primary.main
                 },
                 "& .MuiDataGrid-columnHeader": {
-                    backgroundColor: colors.grey[900]
+                    backgroundColor: theme.palette.background.dark
                 },
                 "& .MuiDataGrid-virtualScroller": {
-                    backgroundColor: colors.grey[900]
+                    backgroundColor: theme.palette.background.dark
                 },
                 "& .MuiDataGrid-footerContainer": {
-                    backgroundColor: colors.grey[900]
+                    backgroundColor: theme.palette.background.dark
                 },
                 "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
-                    color: colors.grey[100]
+                    color: theme.palette.primary.main
                 },
             }}>
                 <DataGrid 

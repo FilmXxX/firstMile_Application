@@ -3,12 +3,9 @@ import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import {mockDataContracts,} from "../../data/mockData";
 
 import Header from "../../components/Header";
-import { tokensDark } from "state/theme";
-
 
 const Contracts = () => {
     const theme = useTheme();
-    const colors = tokensDark(theme.palette.mode)
 
     const columns = [ 
         {field: "id", headerName: "ID", flex:0.5},
@@ -33,19 +30,19 @@ const Contracts = () => {
                     borderBottom: "none"
                 },
                 "& .name-column--cell": {
-                    color: colors.grey[100]
+                    color: theme.palette.primary.main
                 },
                 "& .MuiDataGrid-columnHeader": {
-                    backgroundColor: colors.grey[900]
+                    backgroundColor: theme.palette.background.dark
                 },
                 "& .MuiDataGrid-virtualScroller": {
-                    backgroundColor: colors.grey[900]
+                    backgroundColor: theme.palette.background.dark
                 },
                 "& .MuiDataGrid-footerContainer": {
-                    backgroundColor: colors.grey[900]
+                    backgroundColor: theme.palette.background.dark
                 },
                 "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
-                    color: colors.grey[100]
+                    color: theme.palette.primary.main
                 },
             }}>
                 <DataGrid 

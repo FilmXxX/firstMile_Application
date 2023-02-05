@@ -2,12 +2,10 @@ import { Box, Typography, useTheme } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import {mockDataInvoices,} from "../../data/mockData";
 import Header from "../../components/Header";
-import { tokensDark } from "state/theme";
 
 
 const Invoices = () => {
     const theme = useTheme();
-    const colors = tokensDark(theme.palette.mode)
 
     const columns = [ 
         {field: "id", headerName: "ID"},
@@ -15,7 +13,7 @@ const Invoices = () => {
         {field: "phone", headerName: "Phone Number", flex: 1 },
         {field: "email", headerName: "E-mail", flex: 1 },
         {field: "cost", headerName: "Cost", flex: 1, renderCell: (params) => (
-            <Typography color={colors.redAccent[400]}>
+            <Typography color={theme.palette.secondary.dark}>
                 ${params.row.cost}
             </Typography>
         ) },
@@ -33,22 +31,19 @@ const Invoices = () => {
                     borderBottom: "none"
                 },
                 "& .name-column--cell": {
-                    color: colors.grey[100]
+                    color: theme.palette.primary.main
                 },
                 "& .MuiDataGrid-columnHeader": {
-                    backgroundColor: colors.grey[900]
+                    backgroundColor: theme.palette.background.dark
                 },
                 "& .MuiDataGrid-virtualScroller": {
-                    backgroundColor: colors.grey[900]
+                    backgroundColor: theme.palette.background.dark
                 },
                 "& .MuiDataGrid-footerContainer": {
-                    backgroundColor: colors.grey[900]
+                    backgroundColor: theme.palette.background.dark
                 },
                 "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
-                    color: colors.grey[100]
-                },
-                "& .MuiCheckbox-root": {
-                    color: colors.blueAccent[500]
+                    color: theme.palette.primary.main
                 },
             }}>
                 <DataGrid 
